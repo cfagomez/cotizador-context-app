@@ -1,14 +1,28 @@
 import { Fragment } from "react"
 import { MARCAS, AÑOS, PLANES } from "../constants"
+import CotizadorContext from "../context/CotizadorProvider"
+import useCotizador from "../hooks/useCotizador"
+import Error from "./Error"
 
 const Formulario = () => {
+
+    const {datos, handleChangeDatos, error, cotizarSeguro} = useCotizador(CotizadorContext)
+
   return (
-    <form className="mt-10 p-10">
+    <form 
+        className="mt-10 p-10"
+        onSubmit={cotizarSeguro}
+    >
+        {
+            error && <Error />
+        }
         <div className="my-5">
             <label className="uppercase text-gray-400 font-bold py-10">Marca</label>
             <select 
                 name="marca"
                 className="w-full p-2 border border-gray-400"
+                value={datos.marca}
+                onChange={e => handleChangeDatos(e)}
             >
                 <option>-- Seleccione una marca --</option>
                 {
@@ -28,6 +42,8 @@ const Formulario = () => {
             <select 
                 name="año"
                 className="w-full p-2 border border-gray-400"
+                value={datos.año}
+                onChange={(e) => handleChangeDatos(e)}
             >
                 <option>-- Seleccione Año --</option>
                 {
@@ -53,6 +69,7 @@ const Formulario = () => {
                             type="radio"
                             name="plan"
                             value={plan.id}
+                            onChange={e => handleChangeDatos(e)}
                         />
                     </Fragment>
                 ))
@@ -60,7 +77,7 @@ const Formulario = () => {
             </div>
         </div>
         <input 
-            className="w-full bg-indigo-500 hover:bg-indigo-600 transition-colors text-white cursor-pointer p-3 font-bold uppercase"
+            className="w-full bg-indigo-500 hover:bg-indigo-600 transition-colors text-white cursor-pointer p-3 font-bold uppercase mt-5"
             type="submit"
             value="Cotizar"
         />

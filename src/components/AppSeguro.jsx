@@ -1,4 +1,4 @@
-import React from 'react'
+import Resultado from './Resultado'
 import Formulario from './Formulario'
 
 const AppSeguro = () => {
@@ -9,6 +9,7 @@ const AppSeguro = () => {
         </header>
         <main className='bg-white md:w-2/3 lg:w-2/4 rounded-lg mx-auto shadow'>
             <Formulario />
+            <Resultado />
         </main>
     </>    
   )

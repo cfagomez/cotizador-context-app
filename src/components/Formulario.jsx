@@ -9,8 +9,7 @@ const Formulario = () => {
     const {datos, handleChangeDatos, error, cotizarSeguro} = useCotizador(CotizadorContext)
 
   return (
-    <form 
-        className="mt-10 p-10"
+    <form
         onSubmit={cotizarSeguro}
     >
         {

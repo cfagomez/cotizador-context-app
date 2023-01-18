@@ -15,6 +15,8 @@ const CotizadorProvider = ({children}) => {
 
   const [resultado, setResultado] = useState(0)
 
+  const [cargando, setCargando] = useState(false)
+
   const handleChangeDatos = (e) => {
 
     setDatos({
@@ -46,15 +48,18 @@ const CotizadorProvider = ({children}) => {
     resultado *= calcularPlan(datos.plan)
 
     resultado = formatearDinero(resultado)
+
+    setCargando(true)
     
     setTimeout(() => {
       setResultado(resultado)
+      setCargando(false)
     }, 3000)
 
   }
 
   return (
-    <CotizadorContext.Provider value={{datos, handleChangeDatos, error, cotizarSeguro, resultado}}>
+    <CotizadorContext.Provider value={{datos, handleChangeDatos, error, cotizarSeguro, resultado, cargando}}>
       {children}
     </CotizadorContext.Provider>
   )
